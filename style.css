@@ -1,0 +1,54 @@
+/* TIMETABLE TABLE CSS*/
+#timetable-table
+{
+    display: table;
+    table-layout: fixed;
+    z-index: 1;
+    border-collapse: collapse;
+}
+.timetable-header
+{
+    display: table-row;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1;
+    border-collapse: collapse;
+}
+
+.timetable-row
+{
+    display: table-row;
+    z-index: 1;
+}
+.timetable-cell
+{
+    display: table-cell;
+    min-width: 150px;
+
+    border: 1px solid black;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    z-index: 1;
+}
+
+.timetable-cell-wrapper{
+    height: 45px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.timetable-perform{
+    border: 0px solid black;
+    position: absolute;
+    background-color:blue;
+    z-index: 1;
+}
+.timetable-perform-container{
+    z-index: 0;
+}
+
+.timetable-perform-wrapper{
+    height: 45px;
+    min-widows: 150px;
+}
