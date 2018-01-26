@@ -5,16 +5,14 @@
 $(document).ready(function () {
     //todo perform blok, moet zogezegd grootte zijn van 1 cell, maar de look moet groote zijn gebaseerd op tijd
 
-    //todo first cell is broken fix this
-
     var cellWidth = 150;//todo scaling
     var cellHeight = 45;//todo scaling
-    var duration = 25;//Todo get from perform div
+    var duration = 15;//Todo get from perform div
     var tableWidth = cellWidth * $(".timetable-header").children().length;
     var tableHeight = (cellHeight + 2) * $("#timetable-table").children('.timetable-row').length - 1;
     var containerWidth = tableWidth - cellWidth;
     var containerHeight = tableHeight;
-    var performHeight = duration / 5 * (cellHeight + 2);
+    var performHeight = duration / 5 * (cellHeight + 1);
 
     // console.log(cellHeight);
 
@@ -31,12 +29,11 @@ $(document).ready(function () {
         "width": cellWidth + "px"
     });
 
-    console.log(performHeight);
 
     $(".timetable-perform-wrapper").draggable({
         cursor: 'move',
         containment: $(".timetable-perform-container"),
-        grid: [cellWidth, cellHeight + 1.6],
+        grid: [cellWidth, cellHeight + 1]
     });
 
     $('.sortable').droppable({
@@ -47,10 +44,41 @@ $(document).ready(function () {
                 dragPos = draggable.position(),
                 dropPos = dropable.position();
 
-            console.log(draggable);
-            console.log(dropable);
-            console.log(dragPos);
-            console.log(dropPos);
+            swap(draggable, dropable);
+            // console.log(draggable);
+            // console.log(dropable);
+            // console.log(dragPos);
+            // console.log(dropPos);
         }
     });
+
+    // $.fn.swap = function (dragged) {
+    //     dragged = jQuery(dragged)[0];
+    //     var dropped = this[0];
+    //
+    //
+    // };
+    
+
+    function swap(dragged, dropped) {
+        console.log(dragged);
+        console.log(dropped);
+
+        var parent = $(dropped).parent();
+
+
+
+        // var first = dragged[0];
+        // var second= dropped[0];
+        //
+        // $(first).replaceWith(second);
+        $(dropped[0]).replaceWith(dragged[0]);
+        $(parent).prepend(dropped[0]);
+
+
+        // var foo = $(dropped).replaceWith(dragged);
+        //
+        // $(foo).after(dragged);
+        // console.log(foo);
+    }
 });

@@ -49,6 +49,7 @@
 }
 
 .timetable-perform-wrapper{
+    position: absolute;
     height: 45px;
-    min-widows: 150px;
+    min-width: 150px;
 }
