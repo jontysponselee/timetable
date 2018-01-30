@@ -39,6 +39,7 @@
 }
 
 .timetable-perform{
+    overflow: hidden;
     border: 0px solid black;
     position: absolute;
     background-color:blue;

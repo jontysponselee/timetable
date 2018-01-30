@@ -1,20 +1,83 @@
-//todo uitzoeken hoe ik de nieuwe tijd krijg
-//lege cell switchen met gevulde cell(sortable)
-// kijk waar die dropt en dan naar dichtbij zijnde tijd?
+//todo starttijd vernieuwen
+//todo eindtijd vernieuwen
+
+
+
+function getDuration(duration) {
+    var pieces = duration.split(":");
+
+    var hours = parseInt(pieces[0]),
+        minutes = parseInt(pieces[1]),
+        totalMinutes = hours * 60 + minutes;
+
+    return totalMinutes;
+}
+
+function changeTimeFields(dragged, duration){
+    var startTime = changeStartTime(dragged);
+    changeEndTime(startTime, duration);
+}
+
+function changeStartTime(dragged){
+    var parent = $(dragged[0]).parent(),
+        timeCell = $(parent).find(":first-child"),
+        timeText = $(timeCell)[2],
+        time =  $(timeText).text();
+
+    $(".startTime").html(time);
+
+    return time;
+}
+
+function changeEndTime(startTime, duratie) {
+    //todo wanneer over tijd genereer nieuwe rijen gebaseerd op duratie
+    var pieces = startTime.split(":");
+
+    var startTimeHours = parseInt(pieces[0]),
+        startTimeMinutes = parseInt(pieces[1]);
+
+    var totalMinutes = startTimeHours * 60 + startTimeMinutes + duratie;
+    var hours = Math.floor(totalMinutes / 60).toString();
+    var minutes = totalMinutes % 60;
+        minutes = minutes.toString();
+
+    if(hours.length < 2){
+        hours = "0" + hours;
+    }
+
+    if(minutes.length < 2){
+        minutes = "0" + minutes;
+    }
+
+    var endTime = hours + ':' + minutes;
+
+    $(".endTime").html(endTime);
+}
+
+function swap(dragged, dropped) {
+    var draggedPrev = $(dragged).prev();
+    var droppedPrev = $(dropped).prev();
+
+    $(draggedPrev).after(dropped);
+    $(droppedPrev).after(dragged);
+}
 
 $(document).ready(function () {
-    //todo perform blok, moet zogezegd grootte zijn van 1 cell, maar de look moet groote zijn gebaseerd op tijd
-
     var cellWidth = 150;//todo scaling
     var cellHeight = 45;//todo scaling
-    var duration = 15;//Todo get from perform div
+    var duration = $(".duration").text();
     var tableWidth = cellWidth * $(".timetable-header").children().length;
     var tableHeight = (cellHeight + 2) * $("#timetable-table").children('.timetable-row').length - 1;
     var containerWidth = tableWidth - cellWidth;
     var containerHeight = tableHeight;
+
+    duration = getDuration(duration);
+
     var performHeight = duration / 5 * (cellHeight + 1);
 
-    // console.log(cellHeight);
+
+
+    console.log(duration);
 
     $(".timetable-perform-container").css({
         "width": containerWidth,
@@ -39,46 +102,11 @@ $(document).ready(function () {
     $('.sortable').droppable({
         accept: '.sortable',
         drop: function (event, ui) {
-            var draggable = ui.draggable,
-                dropable = $(this),
-                dragPos = draggable.position(),
-                dropPos = dropable.position();
+            var dragged = ui.draggable,
+                dropped = $(this);
 
-            swap(draggable, dropable);
-            // console.log(draggable);
-            // console.log(dropable);
-            // console.log(dragPos);
-            // console.log(dropPos);
+            swap(dragged, dropped);
+            changeTimeFields(dragged, duration);
         }
     });
-
-    // $.fn.swap = function (dragged) {
-    //     dragged = jQuery(dragged)[0];
-    //     var dropped = this[0];
-    //
-    //
-    // };
-    
-
-    function swap(dragged, dropped) {
-        console.log(dragged);
-        console.log(dropped);
-
-        var parent = $(dropped).parent();
-
-
-
-        // var first = dragged[0];
-        // var second= dropped[0];
-        //
-        // $(first).replaceWith(second);
-        $(dropped[0]).replaceWith(dragged[0]);
-        $(parent).prepend(dropped[0]);
-
-
-        // var foo = $(dropped).replaceWith(dragged);
-        //
-        // $(foo).after(dragged);
-        // console.log(foo);
-    }
 });
