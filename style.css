@@ -1,6 +1,10 @@
+.grid-container{
+    display: none;
+}
+
 .cell{
-    height: 25px;
-    showmedaweh: ye;
+    height: 26px;
+    z-index: 0;
     /*line-height: 1px;*/
     box-shadow:
             1px 0 0 0 black,
@@ -12,4 +16,16 @@
 
 .grid-x:nth-child(even){
     background-color: #f1f1f1;
+}
+
+.timetable-perform{
+    z-index: 1;
+}
+
+.timetable-perform-cell{
+    z-index: 1;
+}
+
+.timetable-perform p {
+    margin: 0;
 }
