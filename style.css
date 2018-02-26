@@ -1,14 +1,14 @@
-
 .cell{
     height: 26px;
     z-index: 0;
     /*line-height: 1px;*/
-    box-shadow:
-            1px 0 0 0 black,
-            /*0 1px 0 0 black,*/
-            /*1px 1px 0 0 black,   !* Just to fix the corner *!*/
-            2px 0 0 0 black inset;
-            /*0 1px 0 0 black inset;*/
+    border-left: 2px solid black;
+    /*box-shadow:*/
+            /*1px 0 0 0 black,*/
+            /*!*0 1px 0 0 black,*!*/
+            /*!*1px 1px 0 0 black,   !* Just to fix the corner *!*!*/
+            /*2px 0 0 0 black inset;*/
+            /*!*0 1px 0 0 black inset;*!*/
 }
 
 .grid-x:nth-child(even){
@@ -16,13 +16,35 @@
 }
 
 .timetable-perform{
-    z-index: 1;
+    padding-top: 5px;
+    padding-left: 8px;
+    background-color: #3498db;
+    color: white;
+    z-index: 0;
+    border: 1px solid black;
+    margin-left: -1px;
+    overflow: hidden;
+    display: none;
 }
 
 .timetable-perform-cell{
-    z-index: 1;
+    z-index: 2;
 }
 
 .timetable-perform p {
     margin: 0;
+}
+
+.perform-delete{
+    font-size: 1.4rem;
+    padding-right: 7px;
+}
+
+.perform-edit{
+    padding-right: 3px;
+    font-size: 1.3rem;
+}
+
+.timetable-perform-container i{
+    float: right;
 }
